@@ -1,0 +1,31 @@
+name: Build JavaScript Library
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18' # Specify the Node.js version
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Babel
+        run: npx babel src --out-dir dist
+
+      - name: Run tests
+        run: npm test
+
+    # Add additional steps if needed, like linting, or publishing to NPM
