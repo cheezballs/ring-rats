@@ -26,5 +26,4 @@ jobs:
         if: always()
         with:
           report_paths: '**/target/surefire-reports/TEST-*.xml'
-          github_token: ${{ secrets.GITHUB_TOKEN }}
           check_name: Test Results
