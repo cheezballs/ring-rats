@@ -19,4 +19,9 @@
         <appender-ref ref="File"/>
     </root>
 
+    <!-- Quiet down, you-->
+    <logger name="org.springframework.context" level="ERROR"/>
+    <logger name="org.springframework.beans.factory" level="ERROR"/>
+    <logger name="org.springframework.boot.autoconfigure.logging" level="ERROR"/>
+
 </configuration>
