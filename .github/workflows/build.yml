@@ -12,7 +12,7 @@ jobs:
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
-          java-version: '11'
+          java-version: '17'
           distribution: 'temurin'
 
       - name: Build with Maven
@@ -22,7 +22,7 @@ jobs:
         run: mvn -B test --file pom.xml
 
       - name: Publish Test Report
-        uses: mikepenz/action-junit-report@v2
+        uses: mikepenz/action-junit-report@v4
         if: always()
         with:
           report_paths: '**/target/surefire-reports/TEST-*.xml'
