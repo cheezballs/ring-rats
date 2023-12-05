@@ -38,7 +38,7 @@ public class SimulationServiceImpl implements SimulationService {
     }
 
     private void setupMatch(MatchConfiguration matchConfig) {
-        log.debug("Setting up simulation {}.", turnNumber);
+        log.debug("Setting up simulation.");
 
         active = true;
     }

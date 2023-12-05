@@ -28,10 +28,10 @@ public class RingRats implements CommandLineRunner {
     public void run(String... args) {
         configService.readCommandLineArguments(args);
         try {
-            MatchConfiguration matchConfig = configService.buildMatchConfiguration();
+            MatchConfiguration matchConfig = configService.buildMatchConfiguration(args);
             simulationService.simulateMatch(matchConfig);
         } catch (ArgumentException e) {
-            log.error(e.getMessage());
+            log.error(e.getMessage(), e);
         }
 
     }
