@@ -2,8 +2,12 @@ package dev.indoors.ringrats.service.impl;
 
 import dev.indoors.ringrats.service.SimulationService;
 import dev.indoors.ringrats.simulation.match.MatchConfiguration;
+import dev.indoors.ringrats.simulation.stipulation.Stipulation;
+import dev.indoors.ringrats.simulation.wrestler.Wrestler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 @Slf4j
 @Service
@@ -12,6 +16,8 @@ public class SimulationServiceImpl implements SimulationService {
     boolean active;
     int turnNumber = 1;
 
+    Set<Wrestler> wrestlers;
+    Set<Stipulation> stipulations;
 
     @Override
     public void simulateMatch(MatchConfiguration matchConfig) {
@@ -40,6 +46,8 @@ public class SimulationServiceImpl implements SimulationService {
     private void setupMatch(MatchConfiguration matchConfig) {
         log.debug("Setting up simulation.");
 
+        wrestlers = matchConfig.getWrestlers();
+        stipulations = matchConfig.getStipulations();
         active = true;
     }
 }

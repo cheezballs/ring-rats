@@ -9,8 +9,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class OneFallStipulation implements Stipulation {
 
-    @Override
-    public String getName() {
-        return "One Fall";
-    }
+    private String name = "One Fall";
+
 }

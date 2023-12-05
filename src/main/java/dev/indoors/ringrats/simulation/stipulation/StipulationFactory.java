@@ -7,7 +7,7 @@ public class StipulationFactory {
             case "OneFall":
                 return new OneFallStipulation();
             default:
-                return null;
+                throw new IllegalArgumentException("Unknown stipulation: " + name);
         }
     }
 }
