@@ -1,4 +1,4 @@
-package dev.indoors.ringrats.wrestler;
+package dev.indoors.ringrats.simulation.wrestler;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

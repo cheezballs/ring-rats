@@ -1,9 +1,9 @@
 package dev.indoors.ringrats.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dev.indoors.ringrats.exception.ArgumentException;
-import dev.indoors.ringrats.match.MatchConfiguration;
 import dev.indoors.ringrats.service.ConfigurationService;
+import dev.indoors.ringrats.simulation.core.exception.ArgumentException;
+import dev.indoors.ringrats.simulation.match.MatchConfiguration;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

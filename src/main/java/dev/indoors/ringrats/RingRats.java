@@ -1,9 +1,9 @@
 package dev.indoors.ringrats;
 
-import dev.indoors.ringrats.exception.ArgumentException;
-import dev.indoors.ringrats.match.MatchConfiguration;
 import dev.indoors.ringrats.service.ConfigurationService;
 import dev.indoors.ringrats.service.SimulationService;
+import dev.indoors.ringrats.simulation.core.exception.ArgumentException;
+import dev.indoors.ringrats.simulation.match.MatchConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

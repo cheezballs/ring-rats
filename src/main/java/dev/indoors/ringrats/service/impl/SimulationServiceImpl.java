@@ -1,7 +1,7 @@
 package dev.indoors.ringrats.service.impl;
 
-import dev.indoors.ringrats.match.MatchConfiguration;
 import dev.indoors.ringrats.service.SimulationService;
+import dev.indoors.ringrats.simulation.match.MatchConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

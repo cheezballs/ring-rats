@@ -1,7 +1,7 @@
-package dev.indoors.ringrats.wrestler;
+package dev.indoors.ringrats.simulation.wrestler;
 
-import dev.indoors.ringrats.condition.Condition;
-import dev.indoors.ringrats.core.Simulatable;
+import dev.indoors.ringrats.simulation.condition.Condition;
+import dev.indoors.ringrats.simulation.core.Simulatable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

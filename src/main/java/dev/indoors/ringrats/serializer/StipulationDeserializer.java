@@ -4,8 +4,8 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
-import dev.indoors.ringrats.stipulation.Stipulation;
-import dev.indoors.ringrats.stipulation.StipulationFactory;
+import dev.indoors.ringrats.simulation.stipulation.Stipulation;
+import dev.indoors.ringrats.simulation.stipulation.StipulationFactory;
 
 import java.io.IOException;
 

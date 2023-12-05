@@ -1,4 +1,4 @@
-package dev.indoors.ringrats.stipulation;
+package dev.indoors.ringrats.simulation.stipulation;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

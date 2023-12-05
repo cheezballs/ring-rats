@@ -1,4 +1,4 @@
-package dev.indoors.ringrats.exception;
+package dev.indoors.ringrats.simulation.core.exception;
 
 import java.io.Serial;
 

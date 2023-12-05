@@ -1,4 +1,4 @@
-package dev.indoors.ringrats.wrestler;
+package dev.indoors.ringrats.simulation.wrestler;
 
 public class Health {
 

@@ -1,0 +1,15 @@
+{
+  "wrestlers": [
+    {
+      "name": "Chudd"
+    },
+    {
+      "name": "Rufus"
+    }
+  ],
+  "stipulations": [
+    {
+      "name": "OneFall"
+    }
+  ]
+}
