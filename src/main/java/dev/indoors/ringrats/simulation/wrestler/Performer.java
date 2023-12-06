@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.scheduling.config.Task;
 
-import java.util.Collection;
+import java.util.Set;
 import java.util.Stack;
 
 @Getter
@@ -15,13 +15,10 @@ import java.util.Stack;
 @NoArgsConstructor
 public abstract class Performer implements Simulatable {
 
-    int maxEnergy;
-    int energy; // current energy
-    float staminaCoeff; // rate at which energy depletes
-
     String name;
 
     Health health;
     Stack<Task> tasks;
-    Collection<Condition> conditions;
+    Set<Condition> conditions;
+    Set<Condition> startingConditions;
 }

@@ -11,5 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 @Setter
 public class Wrestler extends Performer {
 
-
+    int maxEnergy;
+    int energy; // current energy
+    float staminaCoeff; // rate at which energy depletes
 }
