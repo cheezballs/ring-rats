@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.scheduling.config.Task;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.Stack;
 
@@ -19,6 +20,6 @@ public abstract class Performer implements Simulatable {
 
     Health health;
     Stack<Task> tasks;
-    Set<Condition> conditions;
-    Set<Condition> startingConditions;
+    Set<Condition> conditions = new HashSet<>();
+    Set<Condition> startingConditions = new HashSet<>();
 }

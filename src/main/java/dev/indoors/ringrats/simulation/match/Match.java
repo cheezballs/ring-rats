@@ -27,17 +27,14 @@ public class Match {
     public void simulateTurn() {
         turnNumber++;
         log.debug("Simulating turn {}.", turnNumber);
-
     }
 
     public void start() {
         Set<Condition> startingConditions = getStartingConditions();
-
         for (Wrestler wrestler : wrestlers) {
             startingConditions.addAll(wrestler.getStartingConditions());
             wrestler.setConditions(startingConditions);
         }
-
     }
 
     private Set<Condition> getStartingConditions() {
