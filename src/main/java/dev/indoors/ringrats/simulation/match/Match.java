@@ -18,6 +18,7 @@ public class Match {
     Set<Wrestler> wrestlers;
     Set<Stipulation> stipulations;
     int turnNumber = 0;
+    boolean matchActive;
 
     public Match(Set<Wrestler> wrestlers, Set<Stipulation> stipulations) {
         this.wrestlers = wrestlers;
@@ -27,6 +28,10 @@ public class Match {
     public void simulateTurn() {
         turnNumber++;
         log.debug("Simulating turn {}.", turnNumber);
+
+        if (turnNumber > 20) {
+            matchActive = false;
+        }
     }
 
     public void start() {
@@ -35,6 +40,7 @@ public class Match {
             startingConditions.addAll(wrestler.getStartingConditions());
             wrestler.setConditions(startingConditions);
         }
+        matchActive = true;
     }
 
     private Set<Condition> getStartingConditions() {
@@ -45,4 +51,7 @@ public class Match {
         return startingConditions;
     }
 
+    public MatchResults end() {
+        return new MatchResults();
+    }
 }

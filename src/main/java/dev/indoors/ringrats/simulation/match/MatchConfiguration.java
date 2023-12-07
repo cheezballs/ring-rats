@@ -4,10 +4,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.indoors.ringrats.simulation.stipulation.Stipulation;
 import dev.indoors.ringrats.simulation.wrestler.Wrestler;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Set;
 
 @Getter
+@Setter
 public class MatchConfiguration {
 
     @JsonProperty()

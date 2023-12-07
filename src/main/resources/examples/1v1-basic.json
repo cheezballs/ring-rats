@@ -1,15 +1,15 @@
 {
-  "wrestlers": [
-    {
-      "name": "Chudd"
-    },
-    {
-      "name": "Rufus"
-    }
-  ],
-  "stipulations": [
-    {
-      "name": "OneFall"
-    }
-  ]
+	"wrestlers": [
+		{
+			"name": "Chudd"
+		},
+		{
+			"name": "Rufus"
+		}
+	],
+	"stipulations": [
+		{
+			"name": "OneFall"
+		}
+	]
 }
