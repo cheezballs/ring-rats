@@ -1,15 +1,27 @@
 {
-  "wrestlers": [
-    {
-      "name": "Chudd"
-    },
-    {
-      "name": "Rufus"
-    }
-  ],
-  "stipulations": [
-    {
-      "name": "OneFall"
-    }
-  ]
+	"wrestlers": [
+		{
+			"name": "Chudd",
+			"energy": {
+				"beginningValue": 100
+			},
+			"quickness": {
+				"beginningValue": 100
+			}
+		},
+		{
+			"name": "Rufus",
+			"energy": {
+				"beginningValue": 100
+			},
+			"quickness": {
+				"beginningValue": 100
+			}
+		}
+	],
+	"stipulations": [
+		{
+			"name": "OneFall"
+		}
+	]
 }

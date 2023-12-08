@@ -16,10 +16,11 @@ import java.util.Stack;
 @NoArgsConstructor
 public abstract class Performer implements Simulatable {
 
-    String name;
+	String name;
 
-    Health health;
-    Stack<Task> tasks;
-    Set<Condition> conditions = new HashSet<>();
-    Set<Condition> startingConditions = new HashSet<>();
+	Health health;
+	Stack<Task> tasks;
+	Set<Condition> conditions = new HashSet<>();
+	Set<Condition> startingConditions = new HashSet<>();
+
 }

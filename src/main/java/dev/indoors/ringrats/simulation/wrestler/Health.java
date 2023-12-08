@@ -1,11 +1,13 @@
 package dev.indoors.ringrats.simulation.wrestler;
 
+import dev.indoors.ringrats.simulation.attribute.Attribute;
+
 public class Health {
 
-    int head;
-    int arm;
-    int leg;
-    int back;
-    int core;
+	Attribute<Integer> head;
+	Attribute<Integer> arm;
+	Attribute<Integer> leg;
+	Attribute<Integer> back;
+	Attribute<Integer> core;
 
 }

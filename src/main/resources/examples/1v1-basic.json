@@ -1,10 +1,16 @@
 {
 	"wrestlers": [
 		{
-			"name": "Chudd"
+			"name": "Chudd",
+			"energy": {
+				"beginningValue": 100
+			}
 		},
 		{
-			"name": "Rufus"
+			"name": "Rufus",
+			"energy": {
+				"beginningValue": 100
+			}
 		}
 	],
 	"stipulations": [

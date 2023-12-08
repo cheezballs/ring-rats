@@ -1,12 +1,14 @@
 package dev.indoors.ringrats.simulation.match;
 
 import dev.indoors.ringrats.simulation.condition.Condition;
+import dev.indoors.ringrats.simulation.core.comparator.InitiativeComparator;
 import dev.indoors.ringrats.simulation.stipulation.Stipulation;
 import dev.indoors.ringrats.simulation.wrestler.Wrestler;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,10 +30,8 @@ public class Match {
 	public void simulateTurn() {
 		turnNumber++;
 		log.trace("Simulating turn {}.", turnNumber);
-
-		if (turnNumber > 20) {
-			matchActive = false;
-		}
+		Collection<Wrestler> sorted = wrestlers.stream().sorted(new InitiativeComparator()).toList();
+		log.trace("" + sorted.size());
 	}
 
 	public void start() {
