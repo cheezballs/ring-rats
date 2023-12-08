@@ -5,8 +5,8 @@ import dev.indoors.ringrats.simulation.match.MatchConfiguration;
 
 public interface ConfigurationService {
 
-    void readCommandLineArguments(String... args);
+	void readCommandLineArguments(String... args);
 
-    MatchConfiguration buildMatchConfiguration(String... args) throws ArgumentException;
+	MatchConfiguration buildMatchConfiguration(String... args) throws ArgumentException;
 
 }

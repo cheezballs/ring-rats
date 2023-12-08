@@ -1,6 +1,7 @@
 package dev.indoors.ringrats.simulation.condition;
 
-public interface Condition {
+import dev.indoors.ringrats.simulation.core.Simulatable;
 
+public abstract class Condition implements Simulatable {
 
 }

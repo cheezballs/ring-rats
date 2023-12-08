@@ -19,68 +19,65 @@ import java.net.URL;
 @Service
 public class ConfigurationServiceImpl implements ConfigurationService {
 
-    private static final String FLAG_DESIGNATOR = "-";
-    private static final String DEBUG_MODE_FLAG = "d";
-    private static final String INPUT_FILE_FLAG = "f";
+	private static final String FLAG_DESIGNATOR = "-";
+	private static final String DEBUG_MODE_FLAG = "d";
+	private static final String INPUT_FILE_FLAG = "f";
 
-    @Autowired
-    ObjectMapper objectMapper;
+	@Autowired
+	ObjectMapper objectMapper;
 
-    @Getter
-    MatchConfiguration matchConfig;
+	@Getter
+	private boolean debugMode;
 
-    @Getter
-    private boolean debugMode;
+	@Override
+	public void readCommandLineArguments(String... args) {
+		this.debugMode = isDebugMode(args);
+		for (int a = 0; a < args.length; a++) {
+			log.debug("Found argument {} at position {}.", args[a], a);
+		}
+	}
 
-    @Override
-    public void readCommandLineArguments(String... args) {
-        this.debugMode = isDebugMode(args);
-        for (int a = 0; a < args.length; a++) {
-            log.debug("Found argument {} at position {}.", args[a], a);
-        }
-    }
+	@Override
+	public MatchConfiguration buildMatchConfiguration(String[] args) throws ArgumentException {
+		String inputFileFlag = FLAG_DESIGNATOR + INPUT_FILE_FLAG;
+		String inputFilePath = null;
 
-    @Override
-    public MatchConfiguration buildMatchConfiguration(String[] args) throws ArgumentException {
-        String inputFileFlag = FLAG_DESIGNATOR + INPUT_FILE_FLAG;
-        String inputFilePath = null;
+		for (int i = 0; i < args.length; i++) {
+			if (args[i].equals(inputFileFlag)) {
+				inputFilePath = args[i + 1];
+				break;
+			}
+		}
 
-        for (int i = 0; i < args.length; i++) {
-            if (args[i].equals(inputFileFlag)) {
-                inputFilePath = args[i + 1];
-                break;
-            }
-        }
+		if (inputFilePath == null) {
+			throw new ArgumentException("Invalid argument specified for file input.");
+		}
 
-        if (inputFilePath == null) {
-            throw new ArgumentException("Invalid argument specified for file input.");
-        }
+		return parseConfigFromInputFile(inputFilePath);
+	}
 
-        return parseConfigFromInputFile(inputFilePath);
-    }
+	private MatchConfiguration parseConfigFromInputFile(String inputFilePath) throws ArgumentException {
+		try {
+			URL inputFileUrl = ResourceLoader.class.getClassLoader().getResource(inputFilePath);
 
-    private MatchConfiguration parseConfigFromInputFile(String inputFilePath) throws ArgumentException {
-        try {
-            URL inputFileUrl = ResourceLoader.class.getClassLoader().getResource(inputFilePath);
+			if (inputFileUrl == null) {
+				throw new ArgumentException("File not found: " + inputFilePath);
+			}
 
-            if (inputFileUrl == null) {
-                throw new ArgumentException("File not found: " + inputFilePath);
-            }
+			File inputFile = new File(inputFileUrl.toURI());
+			return objectMapper.readValue(inputFile, MatchConfiguration.class);
+		} catch (URISyntaxException | IOException e) {
+			throw new ArgumentException("Could not build a match configuration from the specified input file.", e);
+		}
+	}
 
-            File inputFile = new File(inputFileUrl.toURI());
-            return objectMapper.readValue(inputFile, MatchConfiguration.class);
-        } catch (URISyntaxException | IOException e) {
-            throw new ArgumentException("Could not build a match configuration from the specified input file.", e);
-        }
-    }
-
-    private boolean isDebugMode(String[] args) {
-        String debugModeFlag = FLAG_DESIGNATOR + DEBUG_MODE_FLAG;
-        for (String arg : args) {
-            if (arg.equals(debugModeFlag)) {
-                return true;
-            }
-        }
-        return false;
-    }
+	private boolean isDebugMode(String[] args) {
+		String debugModeFlag = FLAG_DESIGNATOR + DEBUG_MODE_FLAG;
+		for (String arg : args) {
+			if (arg.equals(debugModeFlag)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

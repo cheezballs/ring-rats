@@ -12,14 +12,14 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-public class OneFallStipulation implements Stipulation {
+public class OneFallStipulation extends Stipulation {
 
-    private String name = "One Fall";
+	private String name = "One Fall";
 
-    @Override
-    public Set<Condition> getStartingConditions() {
-        Set<Condition> conditions = new HashSet<>();
-        conditions.add(new StandingInRingCondition());
-        return conditions;
-    }
+	@Override
+	public Set<Condition> getStartingConditions() {
+		Set<Condition> conditions = new HashSet<>();
+		conditions.add(new StandingInRingCondition());
+		return conditions;
+	}
 }

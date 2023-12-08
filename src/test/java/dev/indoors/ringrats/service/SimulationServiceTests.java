@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
+@SpringBootTest(args = {"-f", "examples/1v1-basic.json"})
 public class SimulationServiceTests {
 
 	@InjectMocks
@@ -21,4 +21,5 @@ public class SimulationServiceTests {
 		MatchResults results = simService.simulateMatch(MockMatchConfigurations.basicOneFall(MockWrestlers.create("Wang Chung", "Dangerous Davey")));
 		assertThat(results).isNotNull();
 	}
+	
 }

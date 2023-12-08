@@ -1,12 +1,12 @@
 package dev.indoors.ringrats.simulation.stipulation;
 
 import dev.indoors.ringrats.simulation.condition.Condition;
+import dev.indoors.ringrats.simulation.core.Simulatable;
 
 import java.util.Set;
 
-public interface Stipulation {
+public abstract class Stipulation implements Simulatable {
 
-    String getName();
+	public abstract Set<Condition> getStartingConditions();
 
-    Set<Condition> getStartingConditions();
 }

@@ -11,7 +11,7 @@ trim_trailing_whitespace = true
 # 4 space indentation
 [*.{java,xml,json}]
 indent_style = tab
-indent_size = 2
+indent_size = 3
 
 # Max 120 chars per line
 [*.{java,xml,json}]
