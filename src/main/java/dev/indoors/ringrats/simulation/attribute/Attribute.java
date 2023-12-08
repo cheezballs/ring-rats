@@ -1,19 +1,25 @@
 package dev.indoors.ringrats.simulation.attribute;
 
-import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Builder
-public class Attribute<T extends Number> {
+@NoArgsConstructor
+public class Attribute {
 
-	private T beginningValue;
-	private T currentValue;
+	private Integer beginningValue;
+	private Integer currentValue;
 
 	// for clamping and not breaking the sim
-	private T maxValue;
-	private T minValue;
+	private Integer maxValue;
+	private Integer minValue;
+
+	public void initForSimulation() {
+		if (beginningValue != null) {
+			currentValue = beginningValue;
+		}
+	}
 
 }

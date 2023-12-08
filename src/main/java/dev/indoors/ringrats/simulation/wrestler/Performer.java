@@ -23,4 +23,10 @@ public abstract class Performer implements Simulatable {
 	Set<Condition> conditions = new HashSet<>();
 	Set<Condition> startingConditions = new HashSet<>();
 
+	public void initForSimulation() {
+		if (health != null) {
+			health.initForSimulation();
+		}
+	}
+
 }

@@ -14,20 +14,35 @@ import lombok.extern.slf4j.Slf4j;
 @Setter
 public class Wrestler extends Performer {
 
-	Attribute<Integer> energy;
-	Attribute<Float> stamina;
-	Attribute<Integer> quickness;
+	Attribute energy;
+	Attribute stamina;
+	Attribute quickness;
 
 	public int calcInitiative() {
 		int currQuickness = quickness.getCurrentValue();
 		for (Condition condition : conditions) {
 			for (AttributeModifier attribModifier : condition.getAttributeModifiers()) {
 				if ("quickness".equalsIgnoreCase(attribModifier.getAttributeName())) {
-					currQuickness = attribModifier.performModification(currQuickness).intValue();
+					currQuickness = attribModifier.performModification(currQuickness);
 				}
 			}
 		}
 		return currQuickness;
 	}
 
+
+	@Override
+	public void initializeForSimulation() {
+		super.initForSimulation();
+
+		if (energy != null) {
+			energy.initForSimulation();
+		}
+		if (stamina != null) {
+			stamina.initForSimulation();
+		}
+		if (quickness != null) {
+			quickness.initForSimulation();
+		}
+	}
 }

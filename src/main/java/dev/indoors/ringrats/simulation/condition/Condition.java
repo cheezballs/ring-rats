@@ -1,7 +1,6 @@
 package dev.indoors.ringrats.simulation.condition;
 
 import dev.indoors.ringrats.simulation.attribute.AttributeModifier;
-import dev.indoors.ringrats.simulation.core.Simulatable;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +8,7 @@ import java.util.Collection;
 
 @Getter
 @Setter
-public abstract class Condition implements Simulatable {
+public abstract class Condition {
 
 	private Integer turnDuration;
 	private Integer turnsLeft;

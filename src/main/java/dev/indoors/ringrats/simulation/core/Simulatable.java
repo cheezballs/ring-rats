@@ -4,4 +4,6 @@ public interface Simulatable {
 
 	String getName();
 
+	void initializeForSimulation();
+
 }

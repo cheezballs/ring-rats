@@ -15,8 +15,8 @@ public final class MockWrestlers {
 	public static Wrestler create(String name) {
 		Wrestler wrestler = new Wrestler();
 		wrestler.setName(name);
-		wrestler.setEnergy(Attribute.<Integer>builder().beginningValue(100).currentValue(100).build());
-		wrestler.setQuickness(Attribute.<Integer>builder().beginningValue(100).currentValue(100).build());
+		wrestler.setEnergy(Attribute.builder().beginningValue(100).currentValue(100).build());
+		wrestler.setQuickness(Attribute.builder().beginningValue(100).currentValue(100).build());
 		return wrestler;
 	}
 

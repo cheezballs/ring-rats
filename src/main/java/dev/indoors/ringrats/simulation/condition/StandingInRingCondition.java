@@ -21,4 +21,5 @@ public class StandingInRingCondition extends Condition {
 	public Collection<AttributeModifier> getAttributeModifiers() {
 		return new ArrayList<>();
 	}
+
 }

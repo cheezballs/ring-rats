@@ -11,9 +11,9 @@ public class AttributeModifier {
 
 	String attributeName;
 	ModifierType modifierType;
-	Number valueToModifyBy;
+	Integer valueToModifyBy;
 
-	public Number performModification(Number originalValue) {
+	public Integer performModification(Integer originalValue) {
 		return switch (modifierType) {
 			case MULTIPLY -> performMultiplication(originalValue);
 			case ADD -> performAddition(originalValue);
@@ -22,20 +22,20 @@ public class AttributeModifier {
 		};
 	}
 
-	private Number performDivision(Number originalValue) {
+	private Integer performDivision(Integer originalValue) {
 		// TODO: logic here and below
 		return originalValue;
 	}
 
-	private Number performSubtraction(Number originalValue) {
+	private Integer performSubtraction(Integer originalValue) {
 		return originalValue;
 	}
 
-	private Number performMultiplication(Number originalValue) {
+	private Integer performMultiplication(Integer originalValue) {
 		return originalValue;
 	}
 
-	private Number performAddition(Number originalValue) {
+	private Integer performAddition(Integer originalValue) {
 		return originalValue;
 	}
 

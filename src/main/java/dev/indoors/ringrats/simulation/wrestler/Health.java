@@ -4,10 +4,17 @@ import dev.indoors.ringrats.simulation.attribute.Attribute;
 
 public class Health {
 
-	Attribute<Integer> head;
-	Attribute<Integer> arm;
-	Attribute<Integer> leg;
-	Attribute<Integer> back;
-	Attribute<Integer> core;
+	Attribute head;
+	Attribute arm;
+	Attribute leg;
+	Attribute back;
+	Attribute core;
 
+	public void initForSimulation() {
+		head.initForSimulation();
+		arm.initForSimulation();
+		leg.initForSimulation();
+		back.initForSimulation();
+		core.initForSimulation();
+	}
 }

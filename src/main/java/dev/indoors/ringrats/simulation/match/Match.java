@@ -30,8 +30,10 @@ public class Match {
 	public void simulateTurn() {
 		turnNumber++;
 		log.trace("Simulating turn {}.", turnNumber);
-		Collection<Wrestler> sorted = wrestlers.stream().sorted(new InitiativeComparator()).toList();
-		log.trace("" + sorted.size());
+		Collection<Wrestler> orderedWrestlers = wrestlers.stream().sorted(new InitiativeComparator()).toList();
+		for (Wrestler wrestler : orderedWrestlers) {
+
+		}
 	}
 
 	public void start() {
@@ -39,6 +41,7 @@ public class Match {
 		for (Wrestler wrestler : wrestlers) {
 			startingConditions.addAll(wrestler.getStartingConditions());
 			wrestler.setConditions(startingConditions);
+			wrestler.initializeForSimulation();
 		}
 		log.trace("Setting matchActive to true.");
 		matchActive = true;
