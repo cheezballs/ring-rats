@@ -15,43 +15,47 @@ import java.util.Set;
 @Slf4j
 public class Match {
 
-    Set<Wrestler> wrestlers;
-    Set<Stipulation> stipulations;
-    int turnNumber = 0;
-    boolean matchActive;
+	Set<Wrestler> wrestlers;
+	Set<Stipulation> stipulations;
+	int turnNumber = 0;
+	boolean matchActive;
 
-    public Match(Set<Wrestler> wrestlers, Set<Stipulation> stipulations) {
-        this.wrestlers = wrestlers;
-        this.stipulations = stipulations;
-    }
+	public Match(Set<Wrestler> wrestlers, Set<Stipulation> stipulations) {
+		this.wrestlers = wrestlers;
+		this.stipulations = stipulations;
+	}
 
-    public void simulateTurn() {
-        turnNumber++;
-        log.debug("Simulating turn {}.", turnNumber);
+	public void simulateTurn() {
+		turnNumber++;
+		log.trace("Simulating turn {}.", turnNumber);
 
-        if (turnNumber > 20) {
-            matchActive = false;
-        }
-    }
+		if (turnNumber > 20) {
+			matchActive = false;
+		}
+	}
 
-    public void start() {
-        Set<Condition> startingConditions = getStartingConditions();
-        for (Wrestler wrestler : wrestlers) {
-            startingConditions.addAll(wrestler.getStartingConditions());
-            wrestler.setConditions(startingConditions);
-        }
-        matchActive = true;
-    }
+	public void start() {
+		Set<Condition> startingConditions = getStartingConditions();
+		for (Wrestler wrestler : wrestlers) {
+			startingConditions.addAll(wrestler.getStartingConditions());
+			wrestler.setConditions(startingConditions);
+		}
+		log.trace("Setting matchActive to true.");
+		matchActive = true;
+	}
 
-    private Set<Condition> getStartingConditions() {
-        Set<Condition> startingConditions = new HashSet<>();
-        for (Stipulation stipulation : stipulations) {
-            startingConditions.addAll(stipulation.getStartingConditions());
-        }
-        return startingConditions;
-    }
+	private Set<Condition> getStartingConditions() {
+		log.trace("Processing starting conditions.");
+		Set<Condition> startingConditions = new HashSet<>();
+		for (Stipulation stipulation : stipulations) {
+			log.trace("Adding starting conditions from stipulation {}.", stipulation.getName());
+			startingConditions.addAll(stipulation.getStartingConditions());
+		}
+		log.debug("Processed {} starting conditions.", startingConditions.size());
+		return startingConditions;
+	}
 
-    public MatchResults end() {
-        return new MatchResults();
-    }
+	public MatchResults end() {
+		return new MatchResults();
+	}
 }
