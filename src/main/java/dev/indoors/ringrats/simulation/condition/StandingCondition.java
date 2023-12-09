@@ -9,11 +9,11 @@ import java.util.Collection;
 
 @Getter
 @Setter
-public class StandingInRingCondition extends Condition {
+public class StandingCondition extends Condition {
 
-	private String name = "Standing In Ring";
+	private String name = "Standing";
 
-	public StandingInRingCondition() {
+	public StandingCondition() {
 		super(null);
 	}
 

@@ -1,7 +1,7 @@
 package dev.indoors.ringrats.simulation.stipulation;
 
 import dev.indoors.ringrats.simulation.condition.Condition;
-import dev.indoors.ringrats.simulation.condition.StandingInRingCondition;
+import dev.indoors.ringrats.simulation.condition.StandingCondition;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,7 +19,7 @@ public class OneFallStipulation extends Stipulation {
 	@Override
 	public Set<Condition> getStartingConditions() {
 		Set<Condition> conditions = new HashSet<>();
-		conditions.add(new StandingInRingCondition());
+		conditions.add(new StandingCondition());
 		return conditions;
 	}
 }
