@@ -23,20 +23,19 @@ public class AttributeModifier {
 	}
 
 	private Integer performDivision(Integer originalValue) {
-		// TODO: logic here and below
-		return originalValue;
+		return originalValue / valueToModifyBy;
 	}
 
 	private Integer performSubtraction(Integer originalValue) {
-		return originalValue;
+		return originalValue - valueToModifyBy;
 	}
 
 	private Integer performMultiplication(Integer originalValue) {
-		return originalValue;
+		return originalValue * valueToModifyBy;
 	}
 
 	private Integer performAddition(Integer originalValue) {
-		return originalValue;
+		return originalValue + valueToModifyBy;
 	}
 
 }

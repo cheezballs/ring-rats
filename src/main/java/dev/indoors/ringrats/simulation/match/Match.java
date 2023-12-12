@@ -1,7 +1,9 @@
 package dev.indoors.ringrats.simulation.match;
 
+import dev.indoors.ringrats.simulation.action.Action;
 import dev.indoors.ringrats.simulation.condition.Condition;
 import dev.indoors.ringrats.simulation.core.comparator.InitiativeComparator;
+import dev.indoors.ringrats.simulation.position.Position;
 import dev.indoors.ringrats.simulation.stipulation.Stipulation;
 import dev.indoors.ringrats.simulation.task.FocusAttentionTask;
 import dev.indoors.ringrats.simulation.wrestler.Performer;
@@ -34,6 +36,17 @@ public class Match {
 		// ordered based on current initiative calculation
 		Collection<Wrestler> orderedWrestlers = wrestlers.stream().sorted(new InitiativeComparator()).toList();
 		for (Wrestler wrestler : orderedWrestlers) {
+			Position currentPosition = wrestler.getPosition();
+
+			Set<Action> stipulationActions = new HashSet<>();
+			for (Stipulation stipulation : stipulations) {
+				stipulationActions.addAll(stipulation.getActionMap().get(currentPosition));
+			}
+
+
+			// get list of weighted actions
+			// pick a random action
+			// perform action
 
 		}
 	}
