@@ -2,6 +2,7 @@ package dev.indoors.ringrats.simulation.stipulation;
 
 import dev.indoors.ringrats.simulation.condition.Condition;
 import dev.indoors.ringrats.simulation.condition.StandingCondition;
+import dev.indoors.ringrats.simulation.wrestler.Wrestler;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,6 +16,7 @@ import java.util.Set;
 public class OneFallStipulation extends Stipulation {
 
 	private String name = "One Fall";
+	private Set<Wrestler> activeWrestlers;
 
 	@Override
 	public Set<Condition> getStartingConditions() {

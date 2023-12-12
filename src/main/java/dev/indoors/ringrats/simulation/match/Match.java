@@ -46,7 +46,6 @@ public class Match {
 			wrestler.initializeForSimulation();
 
 			// make the wrestler focus on one of the other wrestlers
-			// TODO: make this better and smarter, dont hit friendly wrestlers, etc
 			Performer performer = findRandomOpponent(wrestler);
 			wrestler.addTask(new FocusAttentionTask(performer));
 		}
@@ -70,7 +69,9 @@ public class Match {
 	}
 
 	private Performer findRandomOpponent(Wrestler wrestler) {
-		List<Wrestler> filteredWrestlers = wrestlers.stream().filter(w -> !w.getName().equals(wrestler.getName())).toList();
+		List<Wrestler> filteredWrestlers = wrestlers.stream().filter(w ->
+			!w.getName().equals(wrestler.getName()) && !w.getTeam().equalsIgnoreCase(wrestler.getTeam())
+		).toList();
 		Random random = new Random();
 		return filteredWrestlers.get(random.nextInt(filteredWrestlers.size()));
 	}

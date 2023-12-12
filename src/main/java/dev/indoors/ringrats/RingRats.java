@@ -14,27 +14,28 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @Slf4j
 public class RingRats implements CommandLineRunner {
 
-    @Autowired
-    ConfigurationService configService;
+	@Autowired
+	ConfigurationService configService;
 
-    @Autowired
-    SimulationService simulationService;
+	@Autowired
+	SimulationService simulationService;
 
-    public static void main(String[] args) {
-        SpringApplication.run(RingRats.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(RingRats.class, args);
+	}
 
-    @Override
-    public void run(String... args) {
-        configService.readCommandLineArguments(args);
-        try {
-            MatchConfiguration matchConfig = configService.buildMatchConfiguration(args);
-            simulationService.simulateMatch(matchConfig);
-        } catch (ArgumentException e) {
-            log.error(e.getMessage(), e);
-        }
-
-    }
+	@Override
+	public void run(String... args) {
+		if (args.length > 0) {
+			configService.readCommandLineArguments(args);
+			try {
+				MatchConfiguration matchConfig = configService.buildMatchConfiguration(args);
+				simulationService.simulateMatch(matchConfig);
+			} catch (ArgumentException e) {
+				log.error(e.getMessage(), e);
+			}
+		}
+	}
 
 }
 

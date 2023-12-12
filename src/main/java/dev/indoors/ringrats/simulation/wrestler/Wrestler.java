@@ -17,6 +17,7 @@ public class Wrestler extends Performer {
 	Attribute energy;
 	Attribute stamina;
 	Attribute quickness;
+	String team;
 
 	public int calcInitiative() {
 		int currQuickness = quickness.getCurrentValue();
