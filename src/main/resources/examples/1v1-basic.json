@@ -1,29 +1,73 @@
 {
+	"typeName": "OneVsOne",
 	"wrestlers": [
 		{
-			"name": "Chudd",
+			"name": "Faster Guy",
 			"energy": {
 				"beginningValue": 100
 			},
+			"stamina": {
+				"beginningValue": 75
+			},
 			"quickness": {
+				"beginningValue": 80
+			},
+			"strength": {
 				"beginningValue": 60
+			},
+			"health": {
+				"head": {
+					"beginningValue": 60
+				},
+				"arm": {
+					"beginningValue": 60
+				},
+				"leg": {
+					"beginningValue": 60
+				},
+				"back": {
+					"beginningValue": 60
+				},
+				"core": {
+					"beginningValue": 60
+				}
 			},
 			"team": "1"
 		},
 		{
-			"name": "Rufus",
+			"name": "Power Guy",
 			"energy": {
 				"beginningValue": 100
 			},
+			"stamina": {
+				"beginningValue": 50
+			},
 			"quickness": {
-				"beginningValue": 75
+				"beginningValue": 40
+			},
+			"strength": {
+				"beginningValue": 80
+			},
+			"health": {
+				"head": {
+					"beginningValue": 70
+				},
+				"arm": {
+					"beginningValue": 40
+				},
+				"leg": {
+					"beginningValue": 70
+				},
+				"back": {
+					"beginningValue": 60
+				},
+				"core": {
+					"beginningValue": 59
+				}
 			},
 			"team": "2"
 		}
 	],
 	"stipulations": [
-		{
-			"name": "OneFall"
-		}
 	]
 }

@@ -1,4 +1,4 @@
-package dev.indoors.ringrats.simulation.core.comparator;
+package dev.indoors.ringrats.core.comparator;
 
 import dev.indoors.ringrats.simulation.wrestler.Wrestler;
 

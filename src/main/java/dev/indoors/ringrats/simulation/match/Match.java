@@ -1,92 +1,71 @@
 package dev.indoors.ringrats.simulation.match;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import dev.indoors.ringrats.core.Simulatable;
+import dev.indoors.ringrats.core.comparator.InitiativeComparator;
+import dev.indoors.ringrats.core.deserializer.MatchDeserializer;
 import dev.indoors.ringrats.simulation.action.Action;
 import dev.indoors.ringrats.simulation.condition.Condition;
-import dev.indoors.ringrats.simulation.core.comparator.InitiativeComparator;
-import dev.indoors.ringrats.simulation.position.Position;
+import dev.indoors.ringrats.simulation.condition.Position;
 import dev.indoors.ringrats.simulation.stipulation.Stipulation;
-import dev.indoors.ringrats.simulation.task.FocusAttentionTask;
-import dev.indoors.ringrats.simulation.wrestler.Performer;
 import dev.indoors.ringrats.simulation.wrestler.Wrestler;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
 @Slf4j
-public class Match {
+@JsonDeserialize(using = MatchDeserializer.class)
+public abstract class Match implements Simulatable {
 
-	Set<Wrestler> wrestlers;
-	Set<Stipulation> stipulations;
-	int turnNumber = 0;
-	boolean matchActive;
+	Collection<Wrestler> wrestlers;
+	Collection<Stipulation> stipulations;
 
-	public Match(Set<Wrestler> wrestlers, Set<Stipulation> stipulations) {
-		this.wrestlers = wrestlers;
-		this.stipulations = stipulations;
+	abstract Set<Condition> getStartingConditions();
+
+	public abstract void simulateTurn();
+
+	public abstract String getName();
+
+	@Override
+	public HashMap<Position, List<Action>> getActionMap() {
+		return new HashMap<>();
 	}
 
-	public void simulateTurn() {
-		turnNumber++;
-		log.trace("Simulating turn {}.", turnNumber);
+	@Override
+	public void initializeForSimulation() {
+		Set<Condition> conditions = getStartingConditions();
 
-		// ordered based on current initiative calculation
-		Collection<Wrestler> orderedWrestlers = wrestlers.stream().sorted(new InitiativeComparator()).toList();
-		for (Wrestler wrestler : orderedWrestlers) {
-			Position currentPosition = wrestler.getPosition();
-
-			Set<Action> stipulationActions = new HashSet<>();
-			for (Stipulation stipulation : stipulations) {
-				stipulationActions.addAll(stipulation.getActionMap().get(currentPosition));
-			}
-
-
-			// get list of weighted actions
-			// pick a random action
-			// perform action
-
-		}
-	}
-
-	public void start() {
-		Set<Condition> startingConditions = getStartingConditions();
-		for (Wrestler wrestler : wrestlers) {
-			startingConditions.addAll(wrestler.getStartingConditions());
-			wrestler.setConditions(startingConditions);
-			wrestler.initializeForSimulation();
-
-			// make the wrestler focus on one of the other wrestlers
-			Performer performer = findRandomOpponent(wrestler);
-			wrestler.addTask(new FocusAttentionTask(performer));
-		}
-		log.trace("Setting matchActive to true.");
-		matchActive = true;
-	}
-
-	private Set<Condition> getStartingConditions() {
-		log.trace("Processing starting conditions.");
-		Set<Condition> startingConditions = new HashSet<>();
 		for (Stipulation stipulation : stipulations) {
-			log.trace("Adding starting conditions from stipulation {}.", stipulation.getName());
-			startingConditions.addAll(stipulation.getStartingConditions());
+			stipulation.initializeForSimulation();
+			conditions.addAll(stipulation.getStartingConditions());
 		}
-		log.debug("Processed {} starting conditions.", startingConditions.size());
-		return startingConditions;
+
+		for (Wrestler wrestler : wrestlers) {
+			wrestler.initializeForSimulation();
+			wrestler.setConditions(conditions);
+			wrestler.setPosition(getInitialWrestlerPosition());
+		}
 	}
 
-	public MatchResults end() {
-		return new MatchResults();
+	protected abstract Position getInitialWrestlerPosition();
+
+	Collection<Wrestler> getWrestlersInActionOrder() {
+		return wrestlers.stream().sorted(new InitiativeComparator()).toList();
 	}
 
-	private Performer findRandomOpponent(Wrestler wrestler) {
-		List<Wrestler> filteredWrestlers = wrestlers.stream().filter(w ->
-			!w.getName().equals(wrestler.getName()) && !w.getTeam().equalsIgnoreCase(wrestler.getTeam())
-		).toList();
-		Random random = new Random();
-		return filteredWrestlers.get(random.nextInt(filteredWrestlers.size()));
+	HashMap<Position, List<Action>> getStipulationsActionMap() {
+		HashMap<Position, List<Action>> actionMap = new HashMap<>();
+		for (Stipulation stipulation : stipulations) {
+			actionMap.putAll(stipulation.getActionMap());
+		}
+		return actionMap;
 	}
 
 }

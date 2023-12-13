@@ -1,11 +1,17 @@
 {
 	"wrestlers": [
 		{
-			"name": "Chudd",
+			"name": "Faster Guy",
 			"energy": {
 				"beginningValue": 100
 			},
+			"stamina": {
+				"beginningValue": 75
+			},
 			"quickness": {
+				"beginningValue": 80
+			},
+			"strength": {
 				"beginningValue": 60
 			},
 			"health": {
@@ -28,12 +34,18 @@
 			"team": "1"
 		},
 		{
-			"name": "Rufus",
+			"name": "Power Guy",
 			"energy": {
 				"beginningValue": 100
 			},
+			"stamina": {
+				"beginningValue": 50
+			},
 			"quickness": {
-				"beginningValue": 75
+				"beginningValue": 40
+			},
+			"strength": {
+				"beginningValue": 80
 			},
 			"health": {
 				"head": {
