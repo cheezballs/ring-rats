@@ -1,7 +1,9 @@
 package dev.indoors.ringrats.simulation.match;
 
 import dev.indoors.ringrats.simulation.action.Action;
+import dev.indoors.ringrats.simulation.action.ActionResult;
 import dev.indoors.ringrats.simulation.action.GrappleMove;
+import dev.indoors.ringrats.simulation.action.StrikeMove;
 import dev.indoors.ringrats.simulation.condition.Condition;
 import dev.indoors.ringrats.simulation.condition.Position;
 import dev.indoors.ringrats.simulation.stipulation.Stipulation;
@@ -24,13 +26,19 @@ public class OneVsOne extends Match {
 
 	@Override
 	public void simulateTurn() {
-		for (Wrestler wrestler : getWrestlersInActionOrder()) {
+		Collection<Wrestler> wrestlers = getWrestlersInActionOrder();
+		for (Wrestler wrestler : wrestlers) {
 			List<Action> actions = new ArrayList<>(getActionMap().get(wrestler.getPosition()));
 			for (Stipulation stipulation : stipulations) {
 				actions.addAll(stipulation.getActionMap().get(wrestler.getPosition()));
 			}
-			Action action = wrestler.chooseAction(actions);
 
+			List<Wrestler> otherWrestlers = new ArrayList<>(wrestlers);
+			otherWrestlers.remove(wrestler);
+			Wrestler target = otherWrestlers.get(0); // get the first since its assumed there's only 1 after filtering
+
+			Action action = wrestler.chooseAction(actions, target);
+			ActionResult result = wrestler.performAction(action);
 		}
 	}
 
@@ -52,7 +60,13 @@ public class OneVsOne extends Match {
 	@Override
 	public HashMap<Position, List<Action>> getActionMap() {
 		HashMap<Position, List<Action>> actions = new HashMap<>(super.getActionMap());
-		actions.put(Position.InRing, Collections.singletonList(new GrappleMove()));
+
+		List<Action> inRingActions = new ArrayList<>();
+		inRingActions.add(new GrappleMove());
+		inRingActions.add(new StrikeMove());
+
+		actions.put(Position.InRing, inRingActions);
+		actions.put(Position.OutOfRing, Collections.singletonList(new GrappleMove()));
 		return actions;
 	}
 }

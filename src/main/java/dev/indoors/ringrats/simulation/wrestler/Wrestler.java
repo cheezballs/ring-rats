@@ -3,6 +3,7 @@ package dev.indoors.ringrats.simulation.wrestler;
 import dev.indoors.ringrats.core.Simulatable;
 import dev.indoors.ringrats.core.engine.Rand;
 import dev.indoors.ringrats.simulation.action.Action;
+import dev.indoors.ringrats.simulation.action.ActionResult;
 import dev.indoors.ringrats.simulation.attribute.Attribute;
 import dev.indoors.ringrats.simulation.attribute.AttributeModifier;
 import dev.indoors.ringrats.simulation.condition.Condition;
@@ -34,6 +35,7 @@ public class Wrestler implements Simulatable {
 
 	Position position;
 	Set<Condition> conditions = new HashSet<>();
+	Wrestler lookingAt;
 
 	public int calcInitiative() {
 		int currQuickness = quickness.getCurrentValue();
@@ -74,11 +76,18 @@ public class Wrestler implements Simulatable {
 		return new HashMap<>();
 	}
 
-	public Action chooseAction(List<Action> actions) {
+	public Action chooseAction(List<Action> actions, Wrestler target) {
 		List<Action> wrestlerActions = getActionMap().get(position);
 		if (wrestlerActions != null) {
 			actions.addAll(wrestlerActions);
 		}
-		return actions.get(Rand.between(0, actions.size() - 1));
+		Action action = actions.get(Rand.between(0, actions.size() - 1));
+		action.setTarget(target);
+		return action;
+	}
+
+	public ActionResult performAction(Action action) {
+		return action.perform(this);
 	}
 }
+

@@ -22,4 +22,18 @@ public class Attribute {
 		}
 	}
 
+	public void addToCurrentValue(Integer value) {
+		currentValue += value;
+		clamp();
+	}
+
+	private void clamp() {
+		if (currentValue < minValue) {
+			currentValue = minValue;
+		}
+		if (currentValue > maxValue) {
+			currentValue = maxValue;
+		}
+	}
+
 }
