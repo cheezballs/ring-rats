@@ -5,6 +5,7 @@
 			"head": 1
 		},
 		"energy": 1,
+		"phase": "early",
 		"collidable": false
 	},
 	{
@@ -13,6 +14,16 @@
 			"head": 2
 		},
 		"energy": 2,
+		"phase": "early",
+		"collidable": false
+	},
+	{
+		"name": "Missile Dropkick",
+		"damage": {
+			"head": 5
+		},
+		"energy": 4,
+		"phase": "middle",
 		"collidable": false
 	}
 ]

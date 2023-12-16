@@ -8,4 +8,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class ActionResult {
+
+	String actionName;
+	String performerName;
+	String targetName;
+	Damage damageDone;
+
 }

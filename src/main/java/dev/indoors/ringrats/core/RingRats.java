@@ -2,6 +2,7 @@ package dev.indoors.ringrats.core;
 
 import dev.indoors.ringrats.core.engine.Engine;
 import dev.indoors.ringrats.simulation.match.Match;
+import dev.indoors.ringrats.simulation.match.MatchResult;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,6 +18,7 @@ public class RingRats {
 		while (engine.isRunning()) {
 			engine.simulateTurn();
 		}
+		MatchResult result = engine.stop();
 	}
 
 }

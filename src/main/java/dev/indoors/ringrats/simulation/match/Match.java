@@ -26,13 +26,19 @@ import java.util.Set;
 @JsonDeserialize(using = MatchDeserializer.class)
 public abstract class Match implements Simulatable {
 
+	private static final int TURN_MIDDLE_THRESHOLD = 10;
+	private static final int TURN_LATE_THRESHOLD = 20;
+
+	int turnNumber;
 	Collection<Wrestler> wrestlers;
 	Collection<Stipulation> stipulations;
 	BaseMoves baseMoves;
 
 	abstract Set<Condition> getStartingConditions();
 
-	public abstract void simulateTurn();
+	public void simulateTurn() {
+		turnNumber++;
+	}
 
 	public abstract String getName();
 
@@ -56,9 +62,21 @@ public abstract class Match implements Simulatable {
 			wrestler.setConditions(conditions);
 			wrestler.setPosition(getInitialWrestlerPosition());
 		}
+
+		turnNumber = 1;
 	}
 
 	protected abstract Position getInitialWrestlerPosition();
+
+	protected MatchPhase getCurrentPhase() {
+		if (turnNumber < TURN_MIDDLE_THRESHOLD) {
+			return MatchPhase.EARLY;
+		} else if (turnNumber < TURN_LATE_THRESHOLD) {
+			return MatchPhase.MIDDLE;
+		} else {
+			return MatchPhase.LATE;
+		}
+	}
 
 	Collection<Wrestler> getWrestlersInActionOrder() {
 		return wrestlers.stream().sorted(new InitiativeComparator()).toList();

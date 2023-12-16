@@ -22,7 +22,12 @@ public class Attribute {
 		}
 	}
 
-	public void addToCurrentValue(Integer value) {
+	public void add(Integer value) {
+		currentValue += value;
+		clamp();
+	}
+
+	public void subtract(Integer value) {
 		currentValue += value;
 		clamp();
 	}

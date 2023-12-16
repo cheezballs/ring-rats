@@ -15,20 +15,35 @@ public class GrappleAction extends Action {
 
 	@Override
 	public ActionResult perform(Wrestler performer) {
-
 		if (!(target instanceof Wrestler targetWrestler)) {
 			throw new UnsupportedOperationException("Target of this action must be of type Wrestler");
 		}
 
-		Health targetHealth = targetWrestler.getHealth();
-		Attribute head = targetHealth.getHead();
-		head.addToCurrentValue(-25);
+		spendEnergy(performer);
+		damageTarget(targetWrestler);
 
-		return new ActionResult();
+		ActionResult result = new ActionResult();
+		result.damageDone = move.getDamage();
+		result.performerName = performer.getName();
+		result.targetName = targetWrestler.getName();
+		result.actionName = getName();
+
+		return result;
+	}
+
+	private void damageTarget(Wrestler targetWrestler) {
+		Health targetHealth = targetWrestler.getHealth();
+		targetHealth.takeDamage(move.getDamage());
 	}
 
 	@Override
 	public String getName() {
 		return move.getName();
+	}
+
+	void spendEnergy(Wrestler wrestler) {
+		int energyCost = move.getEnergy();
+		Attribute performerEnergy = wrestler.getEnergy();
+		performerEnergy.subtract(energyCost);
 	}
 }

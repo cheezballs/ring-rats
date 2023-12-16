@@ -4,6 +4,7 @@ import dev.indoors.ringrats.core.Simulatable;
 import dev.indoors.ringrats.core.engine.Rand;
 import dev.indoors.ringrats.simulation.action.Action;
 import dev.indoors.ringrats.simulation.action.ActionResult;
+import dev.indoors.ringrats.simulation.action.move.OffenseMove;
 import dev.indoors.ringrats.simulation.attribute.Attribute;
 import dev.indoors.ringrats.simulation.attribute.AttributeModifier;
 import dev.indoors.ringrats.simulation.condition.Condition;
@@ -13,10 +14,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Slf4j
 @NoArgsConstructor
@@ -36,6 +34,8 @@ public class Wrestler implements Simulatable {
 	Position position;
 	Set<Condition> conditions = new HashSet<>();
 	Wrestler lookingAt;
+	List<OffenseMove> customGrapples = new ArrayList<>();
+	List<OffenseMove> customStrikes = new ArrayList<>();
 
 	public int calcInitiative() {
 		int currQuickness = quickness.getCurrentValue();

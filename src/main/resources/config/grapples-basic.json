@@ -5,6 +5,16 @@
 			"back": 3
 		},
 		"energy": 2,
+		"phase": "early",
+		"collidable": true
+	},
+	{
+		"name": "Body Slam 2",
+		"damage": {
+			"back": 2
+		},
+		"energy": 2,
+		"phase": "early",
 		"collidable": true
 	},
 	{
@@ -12,7 +22,17 @@
 		"damage": {
 			"head": 4
 		},
-		"energy": 2,
+		"phase": "middle",
+		"energy": 1,
+		"collidable": true
+	},
+	{
+		"name": "Powerbomb",
+		"damage": {
+			"back": 5
+		},
+		"phase": "late",
+		"energy": 4,
 		"collidable": true
 	}
 ]

@@ -1,9 +1,11 @@
 package dev.indoors.ringrats.simulation.match;
 
+import dev.indoors.ringrats.core.engine.Rand;
 import dev.indoors.ringrats.simulation.action.Action;
 import dev.indoors.ringrats.simulation.action.ActionResult;
 import dev.indoors.ringrats.simulation.action.GrappleAction;
 import dev.indoors.ringrats.simulation.action.StrikeAction;
+import dev.indoors.ringrats.simulation.action.move.OffenseMove;
 import dev.indoors.ringrats.simulation.condition.Condition;
 import dev.indoors.ringrats.simulation.condition.Position;
 import dev.indoors.ringrats.simulation.stipulation.Stipulation;
@@ -40,12 +42,22 @@ public class OneVsOne extends Match {
 
 			Action action = wrestler.chooseAction(actions, target);
 
-			if (action instanceof GrappleAction) {
+			if (action instanceof GrappleAction grappleAction) {
+				List<OffenseMove> eligibleMoves = getEligibleGrapples(baseMoves.getBasicGrapples(), getCurrentPhase());
+				eligibleMoves.addAll(getEligibleGrapples(wrestler.getCustomGrapples(), getCurrentPhase()));
+				OffenseMove move = eligibleMoves.get(Rand.between(0, eligibleMoves.size()));
 
+				grappleAction.setMove(move);
 			}
 
 			ActionResult result = wrestler.performAction(action);
 		}
+
+		super.simulateTurn();
+	}
+
+	private List<OffenseMove> getEligibleGrapples(List<OffenseMove> grapples, MatchPhase phase) {
+		return grapples.stream().filter(grapple -> grapple.getPhase().equals(phase)).toList();
 	}
 
 	@Override
