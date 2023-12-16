@@ -17,4 +17,6 @@ public abstract class Action {
 
 	public abstract ActionResult perform(Wrestler performer);
 
+	public abstract String getName();
+
 }

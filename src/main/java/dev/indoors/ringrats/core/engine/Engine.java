@@ -4,6 +4,8 @@ import dev.indoors.ringrats.simulation.match.Match;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.io.IOException;
+
 @NoArgsConstructor
 public class Engine {
 
@@ -17,7 +19,7 @@ public class Engine {
 		this.match = match;
 	}
 
-	public void start() {
+	public void start() throws IOException {
 		turnNumber = 1;
 		match.initializeForSimulation();
 		running = true;

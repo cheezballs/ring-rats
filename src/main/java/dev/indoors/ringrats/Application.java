@@ -17,7 +17,7 @@ public class Application {
 	private static final String FLAG_DESIGNATOR = "-";
 	private static final String INPUT_FILE_FLAG = "f";
 
-	public static void main(String[] args) throws ArgumentException {
+	public static void main(String[] args) throws ArgumentException, IOException {
 		new RingRats().simulate(buildMatch(args));
 	}
 

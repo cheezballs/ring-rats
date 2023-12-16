@@ -31,7 +31,7 @@ public class MatchDeserializer extends JsonDeserializer<Match> {
 			ObjectMapper mapper = (ObjectMapper) jsonParser.getCodec();
 			TreeTraversingParser wrestlerFieldsParser = new TreeTraversingParser(wrestlersNode, mapper);
 			wrestlerFieldsParser.nextToken();
-			Collection<Wrestler> wrestlers = mapper.readValue(wrestlerFieldsParser, new TypeReference<Collection<Wrestler>>() {
+			Collection<Wrestler> wrestlers = mapper.readValue(wrestlerFieldsParser, new TypeReference<>() {
 			});
 
 			match.setWrestlers(wrestlers);
@@ -42,7 +42,7 @@ public class MatchDeserializer extends JsonDeserializer<Match> {
 			ObjectMapper mapper = (ObjectMapper) jsonParser.getCodec();
 			TreeTraversingParser stipulationFieldsParser = new TreeTraversingParser(stipulationNode, mapper);
 			stipulationFieldsParser.nextToken();
-			Collection<Stipulation> stipulations = mapper.readValue(stipulationFieldsParser, new TypeReference<Collection<Stipulation>>() {
+			Collection<Stipulation> stipulations = mapper.readValue(stipulationFieldsParser, new TypeReference<>() {
 			});
 
 			match.setStipulations(stipulations);

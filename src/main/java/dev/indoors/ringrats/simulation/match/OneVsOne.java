@@ -2,8 +2,8 @@ package dev.indoors.ringrats.simulation.match;
 
 import dev.indoors.ringrats.simulation.action.Action;
 import dev.indoors.ringrats.simulation.action.ActionResult;
-import dev.indoors.ringrats.simulation.action.GrappleMove;
-import dev.indoors.ringrats.simulation.action.StrikeMove;
+import dev.indoors.ringrats.simulation.action.GrappleAction;
+import dev.indoors.ringrats.simulation.action.StrikeAction;
 import dev.indoors.ringrats.simulation.condition.Condition;
 import dev.indoors.ringrats.simulation.condition.Position;
 import dev.indoors.ringrats.simulation.stipulation.Stipulation;
@@ -12,6 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.IOException;
 import java.util.*;
 
 @Getter
@@ -38,6 +39,11 @@ public class OneVsOne extends Match {
 			Wrestler target = otherWrestlers.get(0); // get the first since its assumed there's only 1 after filtering
 
 			Action action = wrestler.chooseAction(actions, target);
+
+			if (action instanceof GrappleAction) {
+
+			}
+
 			ActionResult result = wrestler.performAction(action);
 		}
 	}
@@ -48,7 +54,7 @@ public class OneVsOne extends Match {
 	}
 
 	@Override
-	public void initializeForSimulation() {
+	public void initializeForSimulation() throws IOException {
 		super.initializeForSimulation();
 	}
 
@@ -62,11 +68,11 @@ public class OneVsOne extends Match {
 		HashMap<Position, List<Action>> actions = new HashMap<>(super.getActionMap());
 
 		List<Action> inRingActions = new ArrayList<>();
-		inRingActions.add(new GrappleMove());
-		inRingActions.add(new StrikeMove());
+		inRingActions.add(new GrappleAction());
+		inRingActions.add(new StrikeAction());
 
 		actions.put(Position.InRing, inRingActions);
-		actions.put(Position.OutOfRing, Collections.singletonList(new GrappleMove()));
+		actions.put(Position.OutOfRing, Collections.singletonList(new GrappleAction()));
 		return actions;
 	}
 }

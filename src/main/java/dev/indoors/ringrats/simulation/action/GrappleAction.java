@@ -1,10 +1,17 @@
 package dev.indoors.ringrats.simulation.action;
 
+import dev.indoors.ringrats.simulation.action.move.OffenseMove;
 import dev.indoors.ringrats.simulation.attribute.Attribute;
 import dev.indoors.ringrats.simulation.wrestler.Health;
 import dev.indoors.ringrats.simulation.wrestler.Wrestler;
+import lombok.Getter;
+import lombok.Setter;
 
-public class GrappleMove extends Action {
+@Getter
+@Setter
+public class GrappleAction extends Action {
+
+	OffenseMove move;
 
 	@Override
 	public ActionResult perform(Wrestler performer) {
@@ -18,5 +25,10 @@ public class GrappleMove extends Action {
 		head.addToCurrentValue(-25);
 
 		return new ActionResult();
+	}
+
+	@Override
+	public String getName() {
+		return move.getName();
 	}
 }

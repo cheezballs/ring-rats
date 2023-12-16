@@ -28,10 +28,10 @@ public class Attribute {
 	}
 
 	private void clamp() {
-		if (currentValue < minValue) {
+		if (minValue != null && (currentValue < minValue)) {
 			currentValue = minValue;
 		}
-		if (currentValue > maxValue) {
+		if (maxValue != null && (currentValue > maxValue)) {
 			currentValue = maxValue;
 		}
 	}
