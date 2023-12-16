@@ -1,7 +1,7 @@
-package dev.indoors.ringrats.simulation.action;
+package dev.indoors.ringrats.simulation.action.impl;
 
-import dev.indoors.ringrats.simulation.attribute.Attribute;
-import dev.indoors.ringrats.simulation.wrestler.Health;
+import dev.indoors.ringrats.simulation.action.Action;
+import dev.indoors.ringrats.simulation.action.ActionResult;
 import dev.indoors.ringrats.simulation.wrestler.Wrestler;
 
 public class StrikeAction extends Action {
@@ -12,9 +12,6 @@ public class StrikeAction extends Action {
 			throw new UnsupportedOperationException("Target of this action must be of type Wrestler");
 		}
 
-		Health targetHealth = targetWrestler.getHealth();
-		Attribute head = targetHealth.getHead();
-		head.addToCurrentValue(-95);
 
 		return new ActionResult();
 	}

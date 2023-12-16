@@ -13,7 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public abstract class Action {
 
-	Simulatable target;
+	protected Simulatable target;
 
 	public abstract ActionResult perform(Wrestler performer);
 

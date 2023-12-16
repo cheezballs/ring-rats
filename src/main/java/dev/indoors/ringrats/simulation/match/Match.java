@@ -28,13 +28,12 @@ public abstract class Match implements Simulatable {
 
 	private static final int TURN_MIDDLE_THRESHOLD = 10;
 	private static final int TURN_LATE_THRESHOLD = 20;
-
+	protected Collection<Wrestler> wrestlers;
+	protected Collection<Stipulation> stipulations;
+	protected BaseMoves baseMoves;
 	int turnNumber;
-	Collection<Wrestler> wrestlers;
-	Collection<Stipulation> stipulations;
-	BaseMoves baseMoves;
 
-	abstract Set<Condition> getStartingConditions();
+	protected abstract Set<Condition> getStartingConditions();
 
 	public void simulateTurn() {
 		turnNumber++;
@@ -78,11 +77,11 @@ public abstract class Match implements Simulatable {
 		}
 	}
 
-	Collection<Wrestler> getWrestlersInActionOrder() {
+	protected Collection<Wrestler> getWrestlersInActionOrder() {
 		return wrestlers.stream().sorted(new InitiativeComparator()).toList();
 	}
 
-	HashMap<Position, List<Action>> getStipulationsActionMap() {
+	protected HashMap<Position, List<Action>> getStipulationsActionMap() {
 		HashMap<Position, List<Action>> actionMap = new HashMap<>();
 		for (Stipulation stipulation : stipulations) {
 			actionMap.putAll(stipulation.getActionMap());

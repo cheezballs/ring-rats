@@ -1,5 +1,7 @@
-package dev.indoors.ringrats.simulation.action;
+package dev.indoors.ringrats.simulation.action.impl;
 
+import dev.indoors.ringrats.simulation.action.Action;
+import dev.indoors.ringrats.simulation.action.ActionResult;
 import dev.indoors.ringrats.simulation.action.move.OffenseMove;
 import dev.indoors.ringrats.simulation.attribute.Attribute;
 import dev.indoors.ringrats.simulation.wrestler.Health;
@@ -23,10 +25,10 @@ public class GrappleAction extends Action {
 		damageTarget(targetWrestler);
 
 		ActionResult result = new ActionResult();
-		result.damageDone = move.getDamage();
-		result.performerName = performer.getName();
-		result.targetName = targetWrestler.getName();
-		result.actionName = getName();
+		result.setDamageDone(move.getDamage());
+		result.setPerformerName(performer.getName());
+		result.setTargetName(targetWrestler.getName());
+		result.setActionName(getName());
 
 		return result;
 	}

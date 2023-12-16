@@ -1,6 +1,7 @@
-package dev.indoors.ringrats.simulation.condition;
+package dev.indoors.ringrats.simulation.condition.impl;
 
 import dev.indoors.ringrats.simulation.attribute.AttributeModifier;
+import dev.indoors.ringrats.simulation.condition.Condition;
 import lombok.Getter;
 import lombok.Setter;
 

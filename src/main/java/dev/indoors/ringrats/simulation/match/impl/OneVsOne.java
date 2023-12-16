@@ -1,13 +1,15 @@
-package dev.indoors.ringrats.simulation.match;
+package dev.indoors.ringrats.simulation.match.impl;
 
 import dev.indoors.ringrats.core.engine.Rand;
 import dev.indoors.ringrats.simulation.action.Action;
 import dev.indoors.ringrats.simulation.action.ActionResult;
-import dev.indoors.ringrats.simulation.action.GrappleAction;
-import dev.indoors.ringrats.simulation.action.StrikeAction;
+import dev.indoors.ringrats.simulation.action.impl.GrappleAction;
+import dev.indoors.ringrats.simulation.action.impl.StrikeAction;
 import dev.indoors.ringrats.simulation.action.move.OffenseMove;
 import dev.indoors.ringrats.simulation.condition.Condition;
 import dev.indoors.ringrats.simulation.condition.Position;
+import dev.indoors.ringrats.simulation.match.Match;
+import dev.indoors.ringrats.simulation.match.MatchPhase;
 import dev.indoors.ringrats.simulation.stipulation.Stipulation;
 import dev.indoors.ringrats.simulation.wrestler.Wrestler;
 import lombok.Getter;
@@ -23,7 +25,7 @@ import java.util.*;
 public class OneVsOne extends Match {
 
 	@Override
-	Set<Condition> getStartingConditions() {
+	protected Set<Condition> getStartingConditions() {
 		return new HashSet<>();
 	}
 
@@ -43,9 +45,10 @@ public class OneVsOne extends Match {
 			Action action = wrestler.chooseAction(actions, target);
 
 			if (action instanceof GrappleAction grappleAction) {
-				List<OffenseMove> eligibleMoves = getEligibleGrapples(baseMoves.getBasicGrapples(), getCurrentPhase());
+				List<OffenseMove> eligibleMoves = new ArrayList<>();
+				eligibleMoves.addAll(getEligibleGrapples(baseMoves.getBasicGrapples(), getCurrentPhase()));
 				eligibleMoves.addAll(getEligibleGrapples(wrestler.getCustomGrapples(), getCurrentPhase()));
-				OffenseMove move = eligibleMoves.get(Rand.between(0, eligibleMoves.size()));
+				OffenseMove move = eligibleMoves.get(Rand.between(0, eligibleMoves.size() - 1));
 
 				grappleAction.setMove(move);
 			}
