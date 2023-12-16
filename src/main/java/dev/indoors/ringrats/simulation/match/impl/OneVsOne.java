@@ -10,6 +10,7 @@ import dev.indoors.ringrats.simulation.condition.Condition;
 import dev.indoors.ringrats.simulation.condition.Position;
 import dev.indoors.ringrats.simulation.match.Match;
 import dev.indoors.ringrats.simulation.match.MatchPhase;
+import dev.indoors.ringrats.simulation.match.TurnResult;
 import dev.indoors.ringrats.simulation.stipulation.Stipulation;
 import dev.indoors.ringrats.simulation.wrestler.Wrestler;
 import lombok.Getter;
@@ -30,8 +31,11 @@ public class OneVsOne extends Match {
 	}
 
 	@Override
-	public void simulateTurn() {
-		Collection<Wrestler> wrestlers = getWrestlersInActionOrder();
+	public TurnResult simulateTurn() {
+		List<Wrestler> wrestlers = getWrestlersInActionOrder();
+		List<ActionResult> actionResults = new ArrayList<>();
+		TurnResult turnResult = new TurnResult();
+
 		for (Wrestler wrestler : wrestlers) {
 			List<Action> actions = new ArrayList<>(getActionMap().get(wrestler.getPosition()));
 			for (Stipulation stipulation : stipulations) {
@@ -54,9 +58,19 @@ public class OneVsOne extends Match {
 			}
 
 			ActionResult result = wrestler.performAction(action);
+			actionResults.add(result);
 		}
 
-		super.simulateTurn();
+		turnResult.setActionResults(actionResults);
+
+		if (turnNumber < 20) {
+			turnNumber++;
+			return turnResult;
+		} else {
+			turnResult.setEndMatch(true);
+		}
+
+		return turnResult;
 	}
 
 	private List<OffenseMove> getEligibleGrapples(List<OffenseMove> grapples, MatchPhase phase) {

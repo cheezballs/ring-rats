@@ -2,6 +2,7 @@ package dev.indoors.ringrats.core.engine;
 
 import dev.indoors.ringrats.simulation.match.Match;
 import dev.indoors.ringrats.simulation.match.MatchResult;
+import dev.indoors.ringrats.simulation.match.TurnResult;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import java.io.IOException;
 public class Engine {
 
 	Match match;
+	MatchResult result = new MatchResult();
 
 	@Getter
 	boolean running;
@@ -25,12 +27,15 @@ public class Engine {
 	}
 
 	public MatchResult stop() {
-		MatchResult result = new MatchResult();
 		return result;
 	}
 
 	public void simulateTurn() {
-		match.simulateTurn();
+		TurnResult turnResult = match.simulateTurn();
+		result.getTurnResults().add(turnResult);
+		if (turnResult.isEndMatch()) {
+			running = false;
+		}
 	}
 
 }

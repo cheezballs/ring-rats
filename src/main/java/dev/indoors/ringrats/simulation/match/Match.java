@@ -31,13 +31,11 @@ public abstract class Match implements Simulatable {
 	protected Collection<Wrestler> wrestlers;
 	protected Collection<Stipulation> stipulations;
 	protected BaseMoves baseMoves;
-	int turnNumber;
+	protected int turnNumber;
 
 	protected abstract Set<Condition> getStartingConditions();
 
-	public void simulateTurn() {
-		turnNumber++;
-	}
+	public abstract TurnResult simulateTurn();
 
 	public abstract String getName();
 
@@ -77,16 +75,8 @@ public abstract class Match implements Simulatable {
 		}
 	}
 
-	protected Collection<Wrestler> getWrestlersInActionOrder() {
+	protected List<Wrestler> getWrestlersInActionOrder() {
 		return wrestlers.stream().sorted(new InitiativeComparator()).toList();
-	}
-
-	protected HashMap<Position, List<Action>> getStipulationsActionMap() {
-		HashMap<Position, List<Action>> actionMap = new HashMap<>();
-		for (Stipulation stipulation : stipulations) {
-			actionMap.putAll(stipulation.getActionMap());
-		}
-		return actionMap;
 	}
 
 }
