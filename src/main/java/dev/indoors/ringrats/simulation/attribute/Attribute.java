@@ -28,7 +28,7 @@ public class Attribute {
 	}
 
 	public void subtract(Integer value) {
-		currentValue += value;
+		currentValue -= value;
 		clamp();
 	}
 

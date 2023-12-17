@@ -4,7 +4,6 @@ import dev.indoors.ringrats.core.engine.Rand;
 import dev.indoors.ringrats.simulation.action.Action;
 import dev.indoors.ringrats.simulation.action.ActionResult;
 import dev.indoors.ringrats.simulation.action.impl.GrappleAction;
-import dev.indoors.ringrats.simulation.action.impl.StrikeAction;
 import dev.indoors.ringrats.simulation.action.move.OffenseMove;
 import dev.indoors.ringrats.simulation.condition.Condition;
 import dev.indoors.ringrats.simulation.condition.Position;
@@ -98,7 +97,7 @@ public class OneVsOne extends Match {
 
 		List<Action> inRingActions = new ArrayList<>();
 		inRingActions.add(new GrappleAction());
-		inRingActions.add(new StrikeAction());
+		//inRingActions.add(new StrikeAction());
 
 		actions.put(Position.InRing, inRingActions);
 		actions.put(Position.OutOfRing, Collections.singletonList(new GrappleAction()));
