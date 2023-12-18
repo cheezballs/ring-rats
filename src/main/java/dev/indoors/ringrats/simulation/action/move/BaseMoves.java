@@ -18,7 +18,6 @@ public class BaseMoves {
 	private final List<OffenseMove> basicGrapples;
 	private final List<OffenseMove> basicStrikes;
 
-
 	private BaseMoves() throws IOException {
 		basicGrapples = loadFromConfigs("/config/grapples-basic.json");
 		basicStrikes = loadFromConfigs("/config/strikes-basic.json");
@@ -29,6 +28,16 @@ public class BaseMoves {
 			instance = new BaseMoves();
 		}
 		return instance;
+	}
+
+	public static OffenseMove findFor(String actionName, String moveName) {
+		return switch (actionName) {
+			case "grapple" ->
+				instance.getBasicGrapples().stream().filter(move -> move.getName().equalsIgnoreCase(moveName)).findFirst().orElse(null);
+			case "strike" ->
+				instance.getBasicStrikes().stream().filter(move -> move.getName().equalsIgnoreCase(moveName)).findFirst().orElse(null);
+			default -> null;
+		};
 	}
 
 	private List<OffenseMove> loadFromConfigs(String configFilePath) throws IOException {

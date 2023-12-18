@@ -16,5 +16,6 @@ public class OffenseMove {
 	int energy;
 	boolean collidable;
 	MatchPhase phase;
+	Reversal reversal;
 
 }

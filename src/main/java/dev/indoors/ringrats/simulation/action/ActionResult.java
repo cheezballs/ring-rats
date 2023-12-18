@@ -13,5 +13,9 @@ public class ActionResult {
 	String performerName;
 	String targetName;
 	Damage damageDone;
+	boolean reversed;
+	String reversalActionName;
+	String reversalPerformerName;
+	String reversalTargetName;
 
 }

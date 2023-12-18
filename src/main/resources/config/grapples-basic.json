@@ -6,7 +6,14 @@
 		},
 		"energy": 2,
 		"phase": "early",
-		"collidable": true
+		"collidable": true,
+		"reversal": {
+			"attribute": "strength",
+			"move": {
+				"name": "DDT",
+				"action": "grapple"
+			}
+		}
 	},
 	{
 		"name": "Body Slam 2",

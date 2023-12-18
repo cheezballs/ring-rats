@@ -18,6 +18,11 @@ import java.io.IOException;
 public class RingRats {
 
 	public void simulate(Match match) throws IOException {
+		String actionStr = " %s performed %S on %S for %s damage.\n";
+		String reversalStr = " %s performed %S on %S but it was reversed into a %s for %s damage.\n";
+		String reversalStr2 = " %s performed %S on %S but it was reversed!\n";
+		String turnStr = "\n ===   TURN %s   === \n";
+
 		Engine engine = new Engine(match);
 		engine.start();
 		while (engine.isRunning()) {
@@ -27,12 +32,19 @@ public class RingRats {
 
 		int i = 1;
 		for (TurnResult turn : result.getTurnResults()) {
-			String turnStr = "\n ===   TURN %s   === \n";
 			System.out.printf(turnStr, i++);
 
 			for (ActionResult action : turn.getActionResults()) {
-				String actionStr = " %s performed %S on %S for %s damage.\n";
-				System.out.printf(actionStr, action.getPerformerName(), action.getActionName(), action.getTargetName(), damageStringify(action.getDamageDone()));
+				if (action.isReversed()) {
+					String damageStr = damageStringify(action.getDamageDone());
+					if (damageStr.isEmpty()) {
+						System.out.printf(reversalStr2, action.getPerformerName(), action.getActionName(), action.getTargetName());
+					} else {
+						System.out.printf(reversalStr, action.getPerformerName(), action.getActionName(), action.getTargetName(), action.getReversalActionName(), damageStr);
+					}
+				} else {
+					System.out.printf(actionStr, action.getPerformerName(), action.getActionName(), action.getTargetName(), damageStringify(action.getDamageDone()));
+				}
 			}
 		}
 
@@ -50,7 +62,7 @@ public class RingRats {
 		}
 	}
 
-	private Object damageStringify(Damage damageDone) {
+	private String damageStringify(Damage damageDone) {
 		if (damageDone != null) {
 			if (damageDone.getHead() != null) {
 				return damageDone.getHead() + " head";
@@ -68,7 +80,7 @@ public class RingRats {
 				return damageDone.getArm() + " arm";
 			}
 		}
-		return " n/a n/a";
+		return "";
 	}
 
 }
