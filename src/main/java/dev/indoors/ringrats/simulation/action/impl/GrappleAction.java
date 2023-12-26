@@ -21,7 +21,7 @@ public class GrappleAction extends Action {
 	private static String REVERSAL_MOVE_NAME = "Reversal";
 	private static String REVERSAL_ACTION_NAME = "Reversal";
 	private static String REVERSAL_ATTRIBUTE_NAME = "core";
-	private static int BASE_REVERSAL_CHANCE = 90;
+	private static int BASE_REVERSAL_CHANCE = 20;
 	private static float CHANCE_PER_SKILL_POINT = .25f;
 	private static int MIDLINE_SKILL = 50;
 	private static int MAX_SKILL = 100;
@@ -30,28 +30,25 @@ public class GrappleAction extends Action {
 
 	@Override
 	public ActionResult perform(Wrestler performer) {
-		if (!(target instanceof Wrestler targetWrestler)) {
-			throw new UnsupportedOperationException("Target of this action must be of type Wrestler");
-		}
 		ActionResult result = new ActionResult();
 		result.setPerformerName(performer.getName());
-		result.setTargetName(targetWrestler.getName());
+		result.setTargetName(target.getName());
 		result.setActionName(getName());
 
 		if (grappleIsReversed()) {
 			ReversalMove reversalMove = getReversal().getMove();
 			OffenseMove reversalOffense = BaseMoves.findFor(reversalMove.getAction(), reversalMove.getName());
-			spendEnergy(targetWrestler, reversalOffense != null ? reversalOffense.getEnergy() : 0);
+			spendEnergy(target, reversalOffense != null ? reversalOffense.getEnergy() : 0);
 			damageTarget(performer, reversalOffense != null ? reversalOffense.getDamage() : null);
 
 			result.setDamageDone(reversalOffense != null ? reversalOffense.getDamage() : null);
-			result.setReversalPerformerName(targetWrestler.getName());
+			result.setReversalPerformerName(target.getName());
 			result.setReversalTargetName(performer.getName());
 			result.setReversalActionName(getName());
 			result.setReversed(true);
 		} else {
 			spendEnergy(performer);
-			damageTarget(targetWrestler);
+			damageTarget(target);
 			result.setDamageDone(move.getDamage());
 		}
 
@@ -59,7 +56,7 @@ public class GrappleAction extends Action {
 	}
 
 	private boolean grappleIsReversed() {
-		int relevantTargetAttr = findRelevantAttribute((Wrestler) target, getReversal().getAttribute());
+		int relevantTargetAttr = findRelevantAttribute(target, getReversal().getAttribute());
 		return determineGrappleReversed(relevantTargetAttr);
 	}
 
@@ -79,9 +76,10 @@ public class GrappleAction extends Action {
 	}
 
 	private Reversal getReversal() {
-		if (move.getReversal() != null) {
-			return move.getReversal();
+		if (move.getReversals() != null && !move.getReversals().isEmpty()) {
+			return move.getReversals().get(Rand.between(0, move.getReversals().size() - 1));
 		} else {
+			// generic reversal move with no specific move associated
 			Reversal reversal = new Reversal();
 			reversal.setAttribute(REVERSAL_ATTRIBUTE_NAME);
 
@@ -94,14 +92,14 @@ public class GrappleAction extends Action {
 		}
 	}
 
-	private void damageTarget(Wrestler targetWrestler) {
-		Health targetHealth = targetWrestler.getHealth();
+	private void damageTarget(Wrestler target) {
+		Health targetHealth = target.getHealth();
 		targetHealth.takeDamage(move.getDamage());
 	}
 
-	private void damageTarget(Wrestler targetWrestler, Damage damage) {
+	private void damageTarget(Wrestler target, Damage damage) {
 		if (damage != null) {
-			Health targetHealth = targetWrestler.getHealth();
+			Health targetHealth = target.getHealth();
 			targetHealth.takeDamage(damage);
 		}
 	}

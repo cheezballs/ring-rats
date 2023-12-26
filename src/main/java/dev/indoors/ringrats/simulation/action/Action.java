@@ -1,6 +1,5 @@
 package dev.indoors.ringrats.simulation.action;
 
-import dev.indoors.ringrats.core.Simulatable;
 import dev.indoors.ringrats.simulation.wrestler.Wrestler;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,7 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public abstract class Action {
 
-	protected Simulatable target;
+	protected Wrestler target;
 
 	public abstract ActionResult perform(Wrestler performer);
 

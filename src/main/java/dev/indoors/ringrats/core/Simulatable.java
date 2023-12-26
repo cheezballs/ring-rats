@@ -12,5 +12,4 @@ public interface Simulatable {
 	void initializeForSimulation() throws IOException;
 
 	HashMap<Position, List<Action>> getActionMap();
-
 }

@@ -7,22 +7,38 @@
 		"energy": 2,
 		"phase": "early",
 		"collidable": true,
+		"reversals": [
+			{
+				"attribute": "strength",
+				"move": {
+					"name": "Scoop Slam",
+					"action": "grapple"
+				}
+			},
+			{
+				"attribute": "quickness",
+				"move": {
+					"name": "DDT",
+					"action": "grapple"
+				}
+			}
+		]
+	},
+	{
+		"name": "Scoop Slam",
+		"damage": {
+			"back": 3
+		},
+		"energy": 2,
+		"phase": "early",
+		"collidable": true,
 		"reversal": {
-			"attribute": "strength",
+			"attribute": "quickness",
 			"move": {
 				"name": "DDT",
 				"action": "grapple"
 			}
 		}
-	},
-	{
-		"name": "Body Slam 2",
-		"damage": {
-			"back": 2
-		},
-		"energy": 2,
-		"phase": "early",
-		"collidable": true
 	},
 	{
 		"name": "DDT",

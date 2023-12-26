@@ -89,5 +89,6 @@ public class Wrestler implements Simulatable {
 	public ActionResult performAction(Action action) {
 		return action.perform(this);
 	}
+
 }
 
