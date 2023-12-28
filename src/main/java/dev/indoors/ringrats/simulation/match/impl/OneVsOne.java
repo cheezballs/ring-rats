@@ -1,9 +1,10 @@
 package dev.indoors.ringrats.simulation.match.impl;
 
-import dev.indoors.ringrats.core.engine.Rand;
+import dev.indoors.ringrats.core.engine.RandomNumberGen;
 import dev.indoors.ringrats.simulation.action.Action;
 import dev.indoors.ringrats.simulation.action.ActionResult;
 import dev.indoors.ringrats.simulation.action.impl.GrappleAction;
+import dev.indoors.ringrats.simulation.action.impl.PinAction;
 import dev.indoors.ringrats.simulation.action.move.OffenseMove;
 import dev.indoors.ringrats.simulation.condition.Condition;
 import dev.indoors.ringrats.simulation.condition.Position;
@@ -23,6 +24,8 @@ import java.util.*;
 @Setter
 @NoArgsConstructor
 public class OneVsOne extends Match {
+
+	private static final int MIN_TURN_FOR_PIN = 15;
 
 	@Override
 	protected Set<Condition> getStartingConditions() {
@@ -51,24 +54,22 @@ public class OneVsOne extends Match {
 				List<OffenseMove> eligibleMoves = new ArrayList<>();
 				eligibleMoves.addAll(getEligibleGrapples(baseMoves.getBasicGrapples(), getCurrentPhase()));
 				eligibleMoves.addAll(getEligibleGrapples(wrestler.getCustomGrapples(), getCurrentPhase()));
-				OffenseMove move = eligibleMoves.get(Rand.between(0, eligibleMoves.size() - 1));
+				OffenseMove move = eligibleMoves.get(RandomNumberGen.getInstance().randomInteger(eligibleMoves.size() - 1));
 
 				grappleAction.setMove(move);
 			}
 
 			ActionResult result = wrestler.performAction(action);
 			actionResults.add(result);
+
+			if (result.isPinned()) {
+				break;
+			}
 		}
 
 		turnResult.setActionResults(actionResults);
-
-		if (turnNumber < 20) {
-			turnNumber++;
-			return turnResult;
-		} else {
-			turnResult.setEndMatch(true);
-		}
-
+		turnResult.setEndMatch(actionResults.get(actionResults.size() - 1).isPinned());
+		turnNumber++;
 		return turnResult;
 	}
 
@@ -97,7 +98,9 @@ public class OneVsOne extends Match {
 
 		List<Action> inRingActions = new ArrayList<>();
 		inRingActions.add(new GrappleAction());
-		//inRingActions.add(new StrikeAction());
+		if (turnNumber > MIN_TURN_FOR_PIN) {
+			inRingActions.add(new PinAction());
+		}
 
 		actions.put(Position.InRing, inRingActions);
 		actions.put(Position.OutOfRing, Collections.singletonList(new GrappleAction()));

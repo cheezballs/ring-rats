@@ -32,6 +32,14 @@ public class Attribute {
 		clamp();
 	}
 
+	public float getDamageRatio() {
+		return currentValue > 0 ? (float) currentValue / beginningValue : 0;
+	}
+
+	public int getDamageTaken() {
+		return beginningValue - currentValue;
+	}
+
 	private void clamp() {
 		if (minValue != null && (currentValue < minValue)) {
 			currentValue = minValue;

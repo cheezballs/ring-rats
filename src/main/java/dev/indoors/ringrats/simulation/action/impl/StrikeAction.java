@@ -8,10 +8,6 @@ public class StrikeAction extends Action {
 
 	@Override
 	public ActionResult perform(Wrestler performer) {
-		if (!(target instanceof Wrestler targetWrestler)) {
-			throw new UnsupportedOperationException("Target of this action must be of type Wrestler");
-		}
-
 
 		return new ActionResult();
 	}

@@ -44,4 +44,17 @@ public class Health {
 			head.subtract(damage.getHead());
 		}
 	}
+
+	public Attribute getMostDamagedForPin() {
+		Attribute mostDamaged = head;
+
+		if (back.getDamageTaken() > mostDamaged.getDamageTaken()) {
+			mostDamaged = back;
+		} else if (core.getDamageTaken() > mostDamaged.getDamageTaken()) {
+			mostDamaged = core;
+		}
+
+		return mostDamaged;
+	}
+
 }

@@ -1,7 +1,7 @@
 package dev.indoors.ringrats.simulation.wrestler;
 
 import dev.indoors.ringrats.core.Simulatable;
-import dev.indoors.ringrats.core.engine.Rand;
+import dev.indoors.ringrats.core.engine.RandomNumberGen;
 import dev.indoors.ringrats.simulation.action.Action;
 import dev.indoors.ringrats.simulation.action.ActionResult;
 import dev.indoors.ringrats.simulation.action.move.OffenseMove;
@@ -12,11 +12,9 @@ import dev.indoors.ringrats.simulation.condition.Position;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
 
-@Slf4j
 @NoArgsConstructor
 @Getter
 @Setter
@@ -81,7 +79,7 @@ public class Wrestler implements Simulatable {
 		if (wrestlerActions != null) {
 			actions.addAll(wrestlerActions);
 		}
-		Action action = actions.get(Rand.between(0, actions.size() - 1));
+		Action action = actions.get(RandomNumberGen.getInstance().randomInteger(actions.size() - 1));
 		action.setTarget(target);
 		return action;
 	}

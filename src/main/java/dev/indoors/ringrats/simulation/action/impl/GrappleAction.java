@@ -1,6 +1,6 @@
 package dev.indoors.ringrats.simulation.action.impl;
 
-import dev.indoors.ringrats.core.engine.Rand;
+import dev.indoors.ringrats.core.engine.RandomNumberGen;
 import dev.indoors.ringrats.simulation.action.Action;
 import dev.indoors.ringrats.simulation.action.ActionResult;
 import dev.indoors.ringrats.simulation.action.Damage;
@@ -42,8 +42,6 @@ public class GrappleAction extends Action {
 			damageTarget(performer, reversalOffense != null ? reversalOffense.getDamage() : null);
 
 			result.setDamageDone(reversalOffense != null ? reversalOffense.getDamage() : null);
-			result.setReversalPerformerName(target.getName());
-			result.setReversalTargetName(performer.getName());
 			result.setReversalActionName(getName());
 			result.setReversed(true);
 		} else {
@@ -63,7 +61,7 @@ public class GrappleAction extends Action {
 	private boolean determineGrappleReversed(int relevantTargetAttr) {
 		int skill = relevantTargetAttr - MIDLINE_SKILL;
 		int chanceBonus = (int) (skill * CHANCE_PER_SKILL_POINT);
-		int rand = Rand.between(0, 100);
+		int rand = RandomNumberGen.getInstance().grappleReversalRoll();
 		return (BASE_REVERSAL_CHANCE + chanceBonus) > rand;
 	}
 
@@ -77,7 +75,7 @@ public class GrappleAction extends Action {
 
 	private Reversal getReversal() {
 		if (move.getReversals() != null && !move.getReversals().isEmpty()) {
-			return move.getReversals().get(Rand.between(0, move.getReversals().size() - 1));
+			return move.getReversals().get(RandomNumberGen.getInstance().randomInteger(move.getReversals().size() - 1));
 		} else {
 			// generic reversal move with no specific move associated
 			Reversal reversal = new Reversal();

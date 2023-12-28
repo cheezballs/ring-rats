@@ -4,14 +4,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.indoors.ringrats.core.RingRats;
 import dev.indoors.ringrats.core.exception.ArgumentException;
 import dev.indoors.ringrats.simulation.match.Match;
-import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-@Slf4j
 public class Application {
 
 	private static final String FLAG_DESIGNATOR = "-";

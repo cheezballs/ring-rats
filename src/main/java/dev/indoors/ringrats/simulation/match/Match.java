@@ -12,7 +12,6 @@ import dev.indoors.ringrats.simulation.stipulation.Stipulation;
 import dev.indoors.ringrats.simulation.wrestler.Wrestler;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -22,7 +21,6 @@ import java.util.Set;
 
 @Getter
 @Setter
-@Slf4j
 @JsonDeserialize(using = MatchDeserializer.class)
 public abstract class Match implements Simulatable {
 

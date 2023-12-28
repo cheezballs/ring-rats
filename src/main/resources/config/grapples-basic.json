@@ -32,13 +32,15 @@
 		"energy": 2,
 		"phase": "early",
 		"collidable": true,
-		"reversal": {
-			"attribute": "quickness",
-			"move": {
-				"name": "DDT",
-				"action": "grapple"
+		"reversals": [
+			{
+				"attribute": "quickness",
+				"move": {
+					"name": "DDT",
+					"action": "grapple"
+				}
 			}
-		}
+		]
 	},
 	{
 		"name": "DDT",

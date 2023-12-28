@@ -12,10 +12,13 @@ public class ActionResult {
 	String actionName;
 	String performerName;
 	String targetName;
+
 	Damage damageDone;
+
 	boolean reversed;
 	String reversalActionName;
-	String reversalPerformerName;
-	String reversalTargetName;
+
+	Float pinCount;
+	boolean pinned;
 
 }
